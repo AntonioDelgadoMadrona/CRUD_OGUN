@@ -1,13 +1,16 @@
 // DEPENDENCIES
 import React from "react";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
-// import { connect } from "react-redux";
+import { connect, RootStateOrAny } from "react-redux";
 
 // COMPONENTS
 import Layout from "./Layout/Layout";
+// import UserList from "./UserList/UserList";
+// import UserDetails from "./UserDetails/UserDetails";
+import Login from "./Login";
 
 // HIGHT ORDER COMPONENT
-// import { PrivateRoute } from "./hoc/PrivateRoute";
+import { PrivateRoute } from "./hoc/PrivateRoute";
 
 // UTILS
 import { history } from "../utils/history";
@@ -17,15 +20,15 @@ import "./App.css";
 
 export interface IProps {
   logged: boolean;
-}
+};
 
-const App = () => (
+const App: React.FC<IProps> = ({ logged }) => (
   <div data-testid="app-component">
     <Router history={history}>
       <Layout>
-        {/* <Switch>
+        <Switch>
           {!logged && <Route exact path="/login" component={Login} />}
-          <PrivateRoute
+          {/* <PrivateRoute
             exact
             path="/user"
             component={UserDetails}
@@ -36,21 +39,21 @@ const App = () => (
             path="/users"
             component={UserList}
             logged={logged}
-          />
-          <Redirect to={logged ? "/users" : "/login"} />
-        </Switch> */}
+          /> */}
+          <Redirect to={logged ? "/movies" : "/login"} />
+        </Switch>
       </Layout>
     </Router>
   </div>
 );
 
-// const mapStateToProps = (state: any) => {
-//   const { authReducer } = state;
-//   return {
-//     logged: authReducer.logged,
-//   };
-// };
+const mapState = (state: RootStateOrAny) => {
+  const { authReducer } = state;
+  return {
+    logged: authReducer.logged,
+  };
+};
 
 export { App };
 
-// export default connect<IProps>(mapStateToProps)(App);
+export default connect(mapState)(App);
