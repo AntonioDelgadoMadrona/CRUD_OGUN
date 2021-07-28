@@ -8,7 +8,6 @@ export const StyledTable = styled.div`
   padding: 20px;
   background-color: #000;
   border-radius: 10px;
-  box-shadow: 0 2px 2px rgb(0 0 0 / 10%);
   width: 100%;
   height: auto;
   min-height: 650px;

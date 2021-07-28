@@ -21,10 +21,10 @@ export async function getMovieList(page: number) {
 // GET AN USER BY ID
 export async function getMovieDetails(id: string) {
 
-    const requestOptions = {
+    const requestOptions: IRequestOptionGet = {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
     };
 
-    return await fetch(`https://reqres.in/api/users/${id}?delay=1`, requestOptions).then(handleResponse, handleError);
+    return await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`, requestOptions).then(handleResponse, handleError);
 };

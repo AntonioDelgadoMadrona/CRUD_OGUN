@@ -12,9 +12,10 @@ export default function movieReducer(state = initialState, action: any) {
   switch (action.type) {
     // GET MOVIE LIST
     case types.GET_MOVIE_LIST_REQUEST:
-      return { ...state, gettingmovieList: true };
+      return { ...state, gettingMovieList: true };
     case types.GET_MOVIE_LIST_SUCCESS:
       const { page, total_pages, total_results, results } = action.payload;
+      // GET ONLY SOME PROPERTIES
       let updatedList: IMovie[] = [];
       results.map((movie: any) => {
         const updatedMovie: IMovie = {
@@ -28,7 +29,7 @@ export default function movieReducer(state = initialState, action: any) {
       })
       return {
         ...state,
-        gettingmovieList: false,
+        gettingMovieList: false,
         movieList: updatedList,
         moviePagination: {
           itemsPerPage: 20,
@@ -38,18 +39,18 @@ export default function movieReducer(state = initialState, action: any) {
         }
       };
     case types.GET_MOVIE_LIST_FAILURE:
-      return { ...state, gettingmovieList: false };
+      return { ...state, gettingMovieList: false };
     // GET MOVIE DETAILS
     case types.GET_MOVIE_DETAILS_REQUEST:
-      return { ...state, gettingUserDetails: true };
+      return { ...state, gettingMovieDetails: true };
     case types.GET_MOVIE_DETAILS_SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
-        gettingUserDetails: false,
+        gettingMovieDetails: false,
+        movieDetails: action.payload,
       };
     case types.GET_MOVIE_DETAILS_FAILURE:
-      return { ...state, gettingUserDetails: false };
+      return { ...state, gettingMovieDetails: false };
 
     default:
       return { ...state };

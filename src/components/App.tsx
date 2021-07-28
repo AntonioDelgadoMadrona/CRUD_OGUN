@@ -6,7 +6,7 @@ import { connect, RootStateOrAny } from "react-redux";
 // COMPONENTS
 import Layout from "./Layout/Layout";
 import MovieList from "./MovieList/MovieList";
-// import UserDetails from "./UserDetails/UserDetails";
+import MovieDetails from "./MovieDetails/MovieDetails";
 import Login from "./Login/Login";
 
 // HIGHT ORDER COMPONENT
@@ -27,20 +27,20 @@ const App: React.FC<IProps> = ({ logged }) => (
     <Router history={history}>
       <Layout>
         <Switch>
-          {!logged && <Route exact path="/login" component={Login} />}
-          {/* <PrivateRoute
-            exact
-            path="/user"
-            component={UserDetails}
-            logged={logged}
-          /> */}
+          {!logged && <Route exact path="/Login" component={Login} />}
           <PrivateRoute
             exact
-            path="/movies"
+            path="/Movie"
+            component={MovieDetails}
+            logged={logged}
+          />
+          <PrivateRoute
+            exact
+            path="/Movies"
             component={MovieList}
             logged={logged}
           />
-          <Redirect to={logged ? "/movies" : "/login"} />
+          <Redirect to={logged ? "/Movies" : "/Login"} />
         </Switch>
       </Layout>
     </Router>
