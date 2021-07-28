@@ -1,16 +1,21 @@
 // UTILS
 import { handleResponse, handleError } from '../../utils/apiUtils';
 
+// API KEY
+import { API_KEY } from '../../utils/apiKey';
+
+// INTERFACES
+import { IRequestOptionGet } from './../../interfaces/IRequestOptions';
 
 // GET USER LIST
-export async function getMovieList(data: any) {
+export async function getMovieList(page: number) {
 
-    const requestOptions = {
+    const requestOptions: IRequestOptionGet = {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
     };
 
-    return await fetch(`https://reqres.in/api/users?delay=1&page=${data.currentPage}`, requestOptions).then(handleResponse, handleError);
+    return await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`, requestOptions).then(handleResponse, handleError);
 };
 
 // GET AN USER BY ID

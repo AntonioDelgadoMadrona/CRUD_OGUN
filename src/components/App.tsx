@@ -5,7 +5,7 @@ import { connect, RootStateOrAny } from "react-redux";
 
 // COMPONENTS
 import Layout from "./Layout/Layout";
-// import UserList from "./UserList/UserList";
+import MovieList from "./MovieList/MovieList";
 // import UserDetails from "./UserDetails/UserDetails";
 import Login from "./Login/Login";
 
@@ -33,13 +33,13 @@ const App: React.FC<IProps> = ({ logged }) => (
             path="/user"
             component={UserDetails}
             logged={logged}
-          />
+          /> */}
           <PrivateRoute
             exact
-            path="/users"
-            component={UserList}
+            path="/movies"
+            component={MovieList}
             logged={logged}
-          /> */}
+          />
           <Redirect to={logged ? "/movies" : "/login"} />
         </Switch>
       </Layout>

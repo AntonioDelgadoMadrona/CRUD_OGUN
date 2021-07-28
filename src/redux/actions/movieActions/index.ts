@@ -8,14 +8,14 @@ import * as movieService from '../../../services/movieService';
 import { Dispatch } from 'redux';
 
 // GET USER LIST
-export function getMovieListAction(data: any) {
+export function getMovieListAction(page: number) {
 
     return async function (dispatch: Dispatch) {
 
         dispatch(request());
 
-        await movieService.getMovieList(data)
-            .then(response => {                
+        await movieService.getMovieList(page)
+            .then(response => {
                 dispatch(success(response));
             })
             .catch(() => {
