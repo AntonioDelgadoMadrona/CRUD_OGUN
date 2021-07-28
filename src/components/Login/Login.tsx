@@ -1,15 +1,19 @@
 // DEPENDENCES
-import React, { useState } from "react";
+import { memo, useState } from "react";
 
 // REDUX
 import { connect } from "react-redux";
 import { loginAction } from "../../redux/actions/authActions";
 
 // COMPONENTS
-import { LoginForm } from "./LoginForm";
+import { LoginForm } from "./LoginForm/LoginForm";
 
 // STYLES AND UTILS
 import * as validations from "../../utils/validations";
+
+// IMAGES
+import fullImg from "../../images/home background.jpg";
+import logo from "../../images/large logo.png";
 
 // STYLED
 import {
@@ -19,23 +23,31 @@ import {
   StyledForm,
 } from "./styles";
 
+// TYPES
+import { ILoginUser } from "../../interfaces/ILoginUser";
+
 interface IProps {
-  loginAction: any;
+  loginAction(user: ILoginUser): void;
 }
 
-const Login = React.memo<IProps>(({ loginAction }) => {
-  const initialState = {
+export interface ILoginErrors {
+  email?: string;
+  password?: string;
+}
+
+const Login = memo<IProps>(({ loginAction }) => {
+  const initialState: ILoginUser = {
     email: "",
     password: "",
   };
 
-  const [user, setUser] = useState(initialState);
-  const [errors, setErrors] = useState({});
+  const [user, setUser] = useState<ILoginUser>(initialState);
+  const [errors, setErrors] = useState<ILoginErrors>({});
 
   // CHECKS IF THE FORM IS VALID
   const formIsValid = () => {
     const { email, password } = user;
-    const errors: any = {};
+    const errors: ILoginErrors = {};
 
     if (!email) errors.email = "Introduce un email";
     else if (!validations.validateEmailAddress(email))
@@ -67,11 +79,12 @@ const Login = React.memo<IProps>(({ loginAction }) => {
   return (
     <Container>
       <StyledImgContainer>
-        {/* <img src={fullImg} alt="fullImg" /> */}
+        <img src={fullImg} alt="fullImg" />
         <div>
           <LogoContainer>
-            {/* <img src={logo} alt="logoLaLiga" /> */}
+            <img src={logo} alt="logoLaLiga" />
           </LogoContainer>
+          <h1>Todas las películas y series que desees, y mucho más.</h1>
           <h2>Disfruta donde quieras. Cancela cuando quieras.</h2>
         </div>
       </StyledImgContainer>
@@ -88,12 +101,12 @@ const Login = React.memo<IProps>(({ loginAction }) => {
   );
 });
 
-const mapDispatchToProps = {
+const mapDispatch = {
   loginAction,
 };
 
 export { Login };
 
-const LoginContainer = connect<IProps>(null, mapDispatchToProps)(Login);
+const LoginContainer = connect(null, mapDispatch)(Login);
 
 export default LoginContainer;

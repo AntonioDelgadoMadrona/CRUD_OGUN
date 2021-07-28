@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface IExtendedProps {
-  showError: string;
+  showError: boolean;
 }
 
 export const InputContainer = styled.div`

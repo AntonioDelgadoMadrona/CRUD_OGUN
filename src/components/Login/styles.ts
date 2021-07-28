@@ -19,14 +19,7 @@ export const LoginContainer = styled.div`
 
 export const StyledImgContainer = styled.div`
   position: relative;
-  background: #1ce090;
-  background: -moz-linear-gradient(top, #1ce090 0%, #0cbd57 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, #1ce090 0%, #0cbd57 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(
-    to bottom,
-    #1ce090 0%,
-    #0cbd57 100%
-  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  
   width: 100%;
   height: 100%;
 
@@ -38,7 +31,7 @@ export const StyledImgContainer = styled.div`
     position: absolute;
     height: 100%;
     width: auto;
-    opacity: 0.3;
+    opacity: 1;
     z-index: 0;
     overflow: hidden;
   }
@@ -46,7 +39,16 @@ export const StyledImgContainer = styled.div`
   & > div {
     text-align: center;
     z-index: 2;
+    background: rgba(0, 0, 0, .7);
+    padding: 10px 20px;
   }
+
+  & h1,
+  & h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #fff;
+  }
+  
 
   @media ${device.tabletL} {
     display: none;
@@ -69,7 +71,7 @@ export const StyledForm = styled.div`
   position: relative;
   height: 100vh;
   width: 100%;
-  background: #0c1b23;
+  background: #000;
   z-index: 3;
   box-shadow: 0 0 100px #0d0d1e;
 `;

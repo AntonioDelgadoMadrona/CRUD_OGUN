@@ -7,20 +7,23 @@ import * as authService from '../../../services/authService';
 // TYPES
 import { Dispatch } from 'redux';
 
+// INTERFACES
+import { ILoginUser } from './../../../interfaces/ILoginUser';
+
 // UTILS
 import { history } from '../../../utils/history';
 
 // LOGIN
-export function loginAction(user: any) {
+export function loginAction(user: ILoginUser) {
 
     return async function (dispatch: Dispatch) {
 
         dispatch(request());
 
         await authService.login(user)
-            .then(response => {    
-                dispatch(success({ user, token: response }));
-                history.replace("/Users");
+            .then(response => {
+                dispatch(success({ user, token: response?.guest_session_id }));
+                history.replace("/Movies");
             })
             .catch(() => {
                 dispatch(failure());
@@ -35,9 +38,9 @@ export function loginAction(user: any) {
 // LOGOUT
 export function logoutAction() {
 
-    return function (dispatch: Dispatch) {        
+    return function (dispatch: Dispatch) {
         dispatch(request());
-        history.replace("/login");
+        history.replace("/Login");
     };
 
     function request() { return { type: types.LOGOUT_REQUEST } };

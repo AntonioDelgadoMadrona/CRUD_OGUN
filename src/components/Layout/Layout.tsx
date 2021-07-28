@@ -3,11 +3,11 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 
 // REDUX
-import { connect } from "react-redux";
+import { connect, RootStateOrAny } from "react-redux";
 import { logoutAction } from "../../redux/actions/authActions";
 
 // COMPONENTS
-// import { Navbar } from "../Navbar/Navbar";
+import { Navbar } from "../Navbar/Navbar";
 // import { FullScreenSpinner } from "../generic/FullScreenSpinner/FullScreenSpinner";
 // import { Toast } from "../generic/Toast/Toast";
 
@@ -17,20 +17,20 @@ import { Layout as Container, Wrapper } from "./styles";
 
 interface IProps {
   // isLoading: boolean;
-  // logged: boolean;
+  logged?: boolean;
   // toast: IToast;
-  // email: string;
-  logoutAction: any;
+  email: string;
+  logoutAction(): void;
 }
 
 const Layout = React.memo<IProps>(
   ({
     // isLoading,
-    // logged,
-    //  toast, 
-    // email,
+    logged,
+    //  toast,
+    email,
     children,
-    logoutAction
+    logoutAction,
   }) => {
     const { pathname } = useLocation();
 
@@ -41,9 +41,9 @@ const Layout = React.memo<IProps>(
 
     return (
       <Container>
-        {/* {logged && (
+        {logged && (
           <Navbar logged={logged} email={email} logoutAction={logoutAction} />
-        )} */}
+        )}
         {/* {isLoading && <FullScreenSpinner />} */}
         {/* {toast && <Toast toast={toast} />} */}
         <Wrapper path={pathname}>{children}</Wrapper>
@@ -52,7 +52,7 @@ const Layout = React.memo<IProps>(
   }
 );
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: RootStateOrAny) => {
   const { authReducer, apiStatusReducer, alertReducer } = state;
   return {
     logged: authReducer.logged,

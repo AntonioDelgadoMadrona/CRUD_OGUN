@@ -2,17 +2,17 @@
 import * as types from "../../actions/authActions/types";
 
 // UTILS
-// import {
-//   saveUserLocalStorage,
-//   getUserLocalStorage,
-//   removeUserLocalStorage,
-// } from "../../../utils/localStorageUtils";
+import {
+  saveUserLocalStorage,
+  getUserLocalStorage,
+  removeUserLocalStorage,
+} from "../../../utils/localStorageUtils";
 
-// const user = getUserLocalStorage();
+const user = getUserLocalStorage();
 
 export const initialState = {
-  // email: user ? user.email : "",
-  // logged: user ? true : false,
+  email: user ? user.email : "",
+  logged: user ? true : false,
 };
 
 export default function authReducer(state = initialState, action: any) {
@@ -24,7 +24,7 @@ export default function authReducer(state = initialState, action: any) {
       const { user, token } = action.payload;
       return {
         ...state,
-        // email: saveUserLocalStorage(user, token),
+        email: saveUserLocalStorage(user, token),
         logged: true,
         loggingIn: false,
       };
@@ -35,10 +35,10 @@ export default function authReducer(state = initialState, action: any) {
       return {
         ...state,
         logged: false,
-        //  email: removeUserLocalStorage() 
+        email: removeUserLocalStorage()
       };
 
     default:
       return { ...state };
   }
-}
+};

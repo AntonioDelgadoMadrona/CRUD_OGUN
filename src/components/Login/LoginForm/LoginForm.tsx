@@ -1,21 +1,25 @@
 // DEPENDENCIES
-import React from "react";
+import { memo } from "react";
 
 // COMPONENTS
-import { Input } from "../../common/Input";
-import { Button } from "../../common/Button";
+import { Input } from "../../common/Input/Input";
+import { Button } from "../../common/Button/Button";
+
+// INTERFACES
+import { ILoginUser } from "../../../interfaces/ILoginUser";
 
 // STYLED
 import { FormContainer } from "./styles";
+import { ILoginErrors } from "../Login";
 
 interface IProps {
-  user: any;
-  handleChange: Function;
-  errors: any;
-  handleClick: any;
+  user: ILoginUser;
+  handleChange(event: any): void;
+  errors: ILoginErrors;
+  handleClick(event: any): void;
 }
 
-const LoginForm = React.memo<IProps>(
+const LoginForm = memo<IProps>(
   ({ user, handleChange, errors, handleClick }) => {
     return (
       <FormContainer>
@@ -29,7 +33,7 @@ const LoginForm = React.memo<IProps>(
             value={user.email}
             onChange={handleChange}
             error={errors.email}
-            placeholder="charles.morris@reqres.in"
+            placeholder="test@test.com"
             disabled={false}
           />
           <Input

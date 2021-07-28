@@ -1,14 +1,17 @@
 // UTILS
 import { handleResponse, handleError } from '../../utils/apiUtils';
+import { API_KEY } from '../../utils/apiKey';
+
+// INTERFACES
+import { ILoginUser } from '../../interfaces/ILoginUser';
 
 // LOGIN
-export async function login(user: any) {
+export async function login(user: ILoginUser) {
 
     const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(user)
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
     };
 
-    return await fetch(`https://reqres.in/api/login?delay=1`, requestOptions).then(handleResponse, handleError);
+    return await fetch(`https://api.themoviedb.org/3/authentication/guest_session/new?api_key=${API_KEY}`, requestOptions).then(handleResponse, handleError);
 };

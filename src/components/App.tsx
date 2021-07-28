@@ -7,7 +7,7 @@ import { connect, RootStateOrAny } from "react-redux";
 import Layout from "./Layout/Layout";
 // import UserList from "./UserList/UserList";
 // import UserDetails from "./UserDetails/UserDetails";
-import Login from "./Login";
+import Login from "./Login/Login";
 
 // HIGHT ORDER COMPONENT
 import { PrivateRoute } from "./hoc/PrivateRoute";

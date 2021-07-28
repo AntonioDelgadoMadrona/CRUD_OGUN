@@ -1,5 +1,5 @@
 // DEPENDENCIES
-import React from "react";
+import React, { memo } from "react";
 
 // STYLED
 import {
@@ -13,14 +13,14 @@ interface IProps {
   type: "text" | "password" | "email";
   name: string;
   label: string;
-  onChange: any;
-  placeholder: string;
+  onChange(event: any): void;
   value: any;
-  error: string;
-  disabled: boolean;
+  placeholder?: string;
+  error?: string;
+  disabled?: boolean;
 }
 
-const Input = React.memo<IProps>(
+const Input = memo<IProps>(
   ({ type, name, label, onChange, placeholder, value, error, disabled }) => {
     return (
       <InputContainer>
@@ -34,7 +34,7 @@ const Input = React.memo<IProps>(
           value={value}
           onChange={onChange}
           disabled={disabled}
-          showError={error}
+          showError={error ? true : false}
         />
 
         <StyledError>{error && <span>{error}</span>}</StyledError>
