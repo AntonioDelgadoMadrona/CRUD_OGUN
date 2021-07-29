@@ -28,6 +28,10 @@ export const Wrapper = styled.div<IExtendedProps>`
     padding-bottom: 20px;
   }
 
+  @media ${device.tabletS} {
+    margin-top: 85px;
+  }
+
   ${({ path }) =>
     path?.toLowerCase() === "/login" &&
     `

@@ -16,7 +16,7 @@ export const StyledTable = styled.div`
 
 export const StyledContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, auto);
+  grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(4, auto);
   column-gap: 20px;
   row-gap: 35px;
@@ -24,27 +24,27 @@ export const StyledContainer = styled.div`
   margin-bottom: 20px;
 
   @media ${device.tabletL} {
-    grid-template-columns: repeat(4, auto);
+    grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(5, auto);
   }
 
   @media ${device.tabletM} {
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(7, auto);
   }
 
   @media ${device.tabletS} {
-    grid-template-columns: repeat(2, auto);
+    grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(10, auto);
   }
 
   @media ${device.mobileL} {
-    grid-template-columns: repeat(2, auto);
+    grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(10, auto);
   }
 
   @media ${device.mobileM} {
-    grid-template-columns: repeat(1, auto);
+    grid-template-columns: repeat(1, 1fr);
     grid-template-rows: repeat(20, auto);
   }
 `;
@@ -60,7 +60,7 @@ export const StyledItem = styled.div`
 
     & img {
       transform: scale(1.1);
-      transition-duration: 0.5s;
+      transition-duration: 1s;
     }
   }
 

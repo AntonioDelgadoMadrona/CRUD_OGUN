@@ -6,6 +6,7 @@ import { routerReducer, routerMiddleware } from "react-router-redux";
 // REDUCERS
 import movieReducer from "./reducers/movieReducer";
 import authReducer from "./reducers/authReducer";
+import alertReducer from "./reducers/alertReducer";
 
 export default function configureStore(initialState: any, browserHistory: any) {
   const middlewares = [
@@ -27,6 +28,7 @@ export default function configureStore(initialState: any, browserHistory: any) {
   const rootReducer = combineReducers({
     movieReducer,
     authReducer,
+    alertReducer,
     routing: routerReducer,
   });
 

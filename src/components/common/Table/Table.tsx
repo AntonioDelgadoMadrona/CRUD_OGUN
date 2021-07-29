@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface IProps {
   items: any[];
-  page: any;
+  page?: any;
   handlePage(page: number): void;
 }
 

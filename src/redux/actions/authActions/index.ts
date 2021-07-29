@@ -1,5 +1,6 @@
 // ACTION / TYPES
 import * as types from './types';
+import * as alertActions from '../alertActions';
 
 // SERVICES
 import * as authService from '../../../services/authService';
@@ -23,6 +24,7 @@ export function loginAction(user: ILoginUser) {
         await authService.login(user)
             .then(response => {
                 dispatch(success({ user, token: response?.guest_session_id }));
+                dispatch(alertActions.showToastAction({ message: "Has iniciado sesion", type: "SUCCESS" }));
                 history.replace("/Movies");
             })
             .catch(() => {
@@ -40,6 +42,7 @@ export function logoutAction() {
 
     return function (dispatch: Dispatch) {
         dispatch(request());
+        dispatch(alertActions.showToastAction({ message: "¡Gracias, hasta pronto!", type: "SUCCESS" }));
         history.replace("/Login");
     };
 

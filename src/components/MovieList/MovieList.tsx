@@ -8,10 +8,6 @@ import { getMovieListAction } from "../../redux/actions/movieActions";
 // COMPONENTS
 import { Table } from "../common/Table/Table";
 
-// UTILS
-import { history } from "../../utils/history";
-// import { IUser } from "../../interfaces/IUser";
-
 // INTERFACES
 import { IMovie } from "../../interfaces/IMovie";
 
@@ -26,7 +22,7 @@ interface IProps {
 
 interface IState {
   currentPage: number;
-};
+}
 
 const MovieList = memo<IProps>(
   ({ getMovieListAction, movieList, moviePagination }) => {
@@ -39,7 +35,7 @@ const MovieList = memo<IProps>(
     useEffect(() => {
       getMovieListAction(state.currentPage);
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [state]);       
+    }, [state]);
 
     // CHANGE THE PAGE FROM TABLE
     const handlePage = (selectedPage: number) => {
@@ -53,13 +49,16 @@ const MovieList = memo<IProps>(
         const updatedItem = {
           image: (
             <StyledPosterImg>
-              <img src={`https://image.tmdb.org/t/p/w500/${movie.image}`} alt={movie.title}></img>
+              <img
+                src={`https://image.tmdb.org/t/p/w500/${movie.image}`}
+                alt={movie.title}
+              ></img>
             </StyledPosterImg>
           ),
           title: movie.title,
           voteAverage: movie.voteAverage,
           voteCount: movie.voteCount,
-          id: movie.id
+          id: movie.id,
         };
         return (movies = [...movies, updatedItem]);
       });

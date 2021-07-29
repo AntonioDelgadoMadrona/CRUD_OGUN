@@ -1,5 +1,6 @@
 // ACTION / TYPES
 import * as types from './types';
+import * as alertActions from '../alertActions';
 
 // SERVICES
 import * as movieService from '../../../services/movieService';
@@ -52,12 +53,28 @@ export function getMovieDetailsAction(id: string) {
 
 // ADD MOVIE TO FAVOURITE LIST
 export function addMovieToFavouritesAction(movieDetails: IMovieDetails) {
-    return { type: types.ADD_MOVIE_TO_FAVOURITE_LIST, payload: movieDetails };
+
+    return async function (dispatch: Dispatch) {
+
+        dispatch(request(movieDetails))
+        dispatch(alertActions.showToastAction({ message: "Has añadido la pelicula a favoritos", type: "SUCCESS" }));
+
+    };
+
+    function request(payload: IMovieDetails) { return { type: types.ADD_MOVIE_TO_FAVOURITE_LIST, payload } };
 };
 
 // DELETE MOVIE FROM FAVOURITE LIST
 export function deleteMovieFromFavouritesAction(id: number) {
-    return { type: types.DELETE_MOVIE_FROM_FAVOURITE_LIST, payload: id };
+
+    return async function (dispatch: Dispatch) {
+
+        dispatch(request(id))
+        dispatch(alertActions.showToastAction({ message: "Has eliminado la pelicula de favoritos", type: "SUCCESS" }));
+
+    };
+
+    function request(payload: number) { return { type: types.DELETE_MOVIE_FROM_FAVOURITE_LIST, payload } };
 };
 
 // SET MOVIE REDUCER 

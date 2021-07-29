@@ -8,44 +8,45 @@ import { logoutAction } from "../../redux/actions/authActions";
 
 // COMPONENTS
 import { Navbar } from "../Navbar/Navbar";
-// import { FullScreenSpinner } from "../generic/FullScreenSpinner/FullScreenSpinner";
-// import { Toast } from "../generic/Toast/Toast";
+import { Toast } from "../common/Toast/Toast";
 
-// STYLED
+// INTERFACES
+import { IMovieDetails } from "../../interfaces/IMovieDetails";
+import { IToast } from "../../interfaces/IToast";
+
+// STYLES
 import { Layout as Container, Wrapper } from "./styles";
-// import { IToast } from "../../interfaces/IToast";
 
 interface IProps {
-  // isLoading: boolean;
   logged?: boolean;
-  // toast: IToast;
+  toast: IToast;
   email: string;
   logoutAction(): void;
+  favMovieList: IMovieDetails[]
 }
 
 const Layout = React.memo<IProps>(
   ({
-    // isLoading,
     logged,
-    //  toast,
+    toast,
     email,
     children,
     logoutAction,
+    favMovieList,
   }) => {
     const { pathname } = useLocation();
-
-    // FIX THE BODY FOR NOT SCROLL
-    // if (isLoading)
-    //   document.getElementsByTagName("body")[0].style.overflowY = "hidden";
-    // else document.getElementsByTagName("body")[0].style.overflow = "auto";
 
     return (
       <Container>
         {logged && (
-          <Navbar logged={logged} email={email} logoutAction={logoutAction} />
+          <Navbar
+            logged={logged}
+            email={email}
+            logoutAction={logoutAction}
+            hasFav={favMovieList?.length > 0}
+          />
         )}
-        {/* {isLoading && <FullScreenSpinner />} */}
-        {/* {toast && <Toast toast={toast} />} */}
+        {toast && <Toast toast={toast} />}
         <Wrapper path={pathname}>{children}</Wrapper>
       </Container>
     );
@@ -53,12 +54,12 @@ const Layout = React.memo<IProps>(
 );
 
 const mapStateToProps = (state: RootStateOrAny) => {
-  const { authReducer, apiStatusReducer, alertReducer } = state;
+  const { authReducer, movieReducer, alertReducer } = state;
   return {
     logged: authReducer.logged,
     email: authReducer.email,
-    // isLoading: apiStatusReducer > 0,
-    // toast: alertReducer.toast,
+    toast: alertReducer.toast,
+    favMovieList: movieReducer.favMovieList,
   };
 };
 

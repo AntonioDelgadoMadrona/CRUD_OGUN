@@ -1,5 +1,6 @@
 // DEPENDENCIES
 import { memo } from "react";
+import { useHistory } from "react-router-dom";
 
 // STYLED
 import { StyledNavbar, ImgContainer, LinksContainer } from "./styled";
@@ -13,9 +14,13 @@ interface IProps {
   logged?: boolean;
   email: string;
   logoutAction(): void;
+  hasFav: boolean;
 }
 
-const Navbar = memo<IProps>(({ logged, email, logoutAction }) => {
+const Navbar = memo<IProps>(({ logged, email, logoutAction, hasFav }) => {
+
+  const history = useHistory();
+
   return (
     <StyledNavbar>
       <ImgContainer>
@@ -27,6 +32,16 @@ const Navbar = memo<IProps>(({ logged, email, logoutAction }) => {
           <ul>
             <li>
               <strong>{email}</strong>
+            </li>
+            <li>
+              <span onClick={() => history.push('/Movies')}>
+                Peliculas
+              </span>
+            </li>
+            <li>
+              <span className={hasFav ? '' : 'inactive'} onClick={() => history.push('/FavMovieList')}>
+                Favoritos
+              </span>
             </li>
             <li>
               <span onClick={logoutAction}>

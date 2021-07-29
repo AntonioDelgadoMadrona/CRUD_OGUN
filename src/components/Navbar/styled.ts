@@ -7,13 +7,21 @@ export const StyledNavbar = styled.header`
   top: 0;
   width: 100%;
   background: #000;
-  display: flex;
+  display: grid;
+  grid-template-columns: max-content auto;
   align-items: center;
   justify-content: space-between;
   padding: 0 50px;
   height: 70px;
   color: #fef6b9;
   box-sizing: border-box;
+
+  @media ${device.tabletS} {
+    padding: 10px 30px 0px 30px;
+    height: 85px;
+    grid-template-columns: 100%;
+    grid-template-rows: auto auto;
+  }
 `;
 
 export const ImgContainer = styled.div`
@@ -21,6 +29,12 @@ export const ImgContainer = styled.div`
   height: auto;
   display: flex;
   align-items: center;
+
+  @media ${device.tabletS} {
+    justify-self: center;
+    width: 100px;
+    margin-bottom: -10px;
+  }
 
   & > img {
     width: 100%;
@@ -39,11 +53,14 @@ export const LinksContainer = styled.div`
     justify-content: space-between;
     align-items: flex-end;
 
-    & > li {
-      margin-right: 10px;
+    @media ${device.tabletS} {
+      padding-left: 0;
+    }
+
+    & > li:not(:last-child) {
+      margin-right: 30px;
 
       & strong {
-        margin-right: 30px;
         font-size: 1.1rem;
         color: #fff;
         opacity: 0.9;
@@ -71,6 +88,11 @@ export const LinksContainer = styled.div`
 
       & > svg {
         margin-right: 5px;
+      }
+
+      &.inactive {
+        pointer-events: none;
+        opacity: 0.5;
       }
     }
   }
