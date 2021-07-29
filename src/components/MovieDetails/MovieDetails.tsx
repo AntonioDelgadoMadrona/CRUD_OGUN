@@ -1,7 +1,7 @@
 // DEPENDENCIES
 import { memo, useEffect } from "react";
 import queryString from "querystring";
-import { Link, useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import moment from "moment";
 
 // REDUX
@@ -43,6 +43,7 @@ const MovieDetails = memo<IProps>(
     setMovieReducerAction,
   }) => {
     // FILTERS FROM URL
+    const history = useHistory();
     const { search } = useLocation();
     const { id: movieId }: any = queryString.decode(search.replace("?", ""));
 
@@ -59,9 +60,9 @@ const MovieDetails = memo<IProps>(
 
     return (
       <Container>
-        <Link to="/Movies">
+        <span onClick={() => history.goBack()}>
           <FontAwesomeIcon icon={faAngleLeft} />
-        </Link>
+        </span>
         <StyledDetails>
           <img
             className="movieDetails__backImg"

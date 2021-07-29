@@ -18,12 +18,23 @@ interface IProps {
   placeholder?: string;
   error?: string;
   disabled?: boolean;
+  disableError?: boolean;
 }
 
 const Input = memo<IProps>(
-  ({ type, name, label, onChange, placeholder, value, error, disabled }) => {
+  ({
+    type,
+    name,
+    label,
+    onChange,
+    placeholder,
+    value,
+    error,
+    disabled,
+    disableError,
+  }) => {
     return (
-      <InputContainer>
+      <InputContainer className="input__container">
         {label && <StyledLabel htmlFor={name}>{label}</StyledLabel>}
 
         <StyledInput
@@ -37,7 +48,9 @@ const Input = memo<IProps>(
           showError={error ? true : false}
         />
 
-        <StyledError>{error && <span>{error}</span>}</StyledError>
+        {!disableError && (
+          <StyledError>{error && <span>{error}</span>}</StyledError>
+        )}
       </InputContainer>
     );
   }

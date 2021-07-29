@@ -35,3 +35,25 @@ export const StyledPosterImg = styled.div`
     height: 250px;
   }
 `;
+
+export const InputContainer = styled.div`
+  width: 100%;
+  background-color: #000;
+  padding-top: 10px;
+  border-radius: 10px 10px 0 0;
+  margin-bottom: -8px;
+
+  & .input__container {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    align-items: center;
+    column-gap: 20px;
+    justify-content: center;
+
+    @media ${device.tabletS} {
+      grid-template-columns: auto;
+      grid-template-rows: auto auto;
+      column-gap: 0;
+    }
+  }
+`;

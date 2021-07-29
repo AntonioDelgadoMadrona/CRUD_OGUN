@@ -1,3 +1,4 @@
+import { SEARCH_MOVIE_FAILURE } from './../../actions/movieActions/types';
 // TYPES
 import * as types from "../../actions/movieActions/types";
 
@@ -90,6 +91,36 @@ export default function movieReducer(state = initialState, action: any) {
         }
       });
       return state = { ...newState };
+    // SEARCH MOVIE
+    case types.SEARCH_MOVIE_REQUEST:
+      return { ...state, searchingMovie: true };
+    case types.SEARCH_MOVIE_SUCCESS:
+      const { page: searchedPage, total_pages: totalPages, total_results: totalResults, results: searchedResults } = action.payload;
+      // GET ONLY SOME PROPERTIES
+      let searchedList: IMovie[] = [];
+      searchedResults.map((movie: any) => {
+        const updatedMovie: IMovie = {
+          title: movie.title,
+          image: movie.poster_path,
+          id: movie.id,
+          voteAverage: movie.vote_average,
+          voteCount: movie.vote_count,
+        };
+        return searchedList = [...searchedList, updatedMovie];
+      })
+      return {
+        ...state,
+        searchingMovie: false,
+        movieList: searchedList,
+        moviePagination: {
+          itemsPerPage: 20,
+          totalItems: totalResults,
+          totalPages: totalPages,
+          currentPage: searchedPage
+        }
+      };
+    case types.SEARCH_MOVIE_FAILURE:
+      return { ...state, searchingMovie: false };
 
     default:
       return { ...state };

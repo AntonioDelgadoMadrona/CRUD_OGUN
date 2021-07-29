@@ -6,8 +6,7 @@ export const StyledMovieDetails = styled.div`
   width: 100%;
   margin-top: 20px;
 
-  & > a {
-    text-decoration: none;
+  & > span {
     display: flex;
     align-items: flex-end;
     width: max-content;
@@ -20,6 +19,7 @@ export const StyledMovieDetails = styled.div`
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
+    cursor: pointer;
 
     &:hover > svg {
       opacity: 0.8;

@@ -1,9 +1,14 @@
 // DEPENDENCIES
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect } from "react";
+import { useHistory, useLocation } from "react-router-dom";
+import queryString from "querystring";
 
 // REDUX
 import { connect, RootStateOrAny } from "react-redux";
-import { getMovieListAction } from "../../redux/actions/movieActions";
+import {
+  getMovieListAction,
+  searchMovieAction,
+} from "../../redux/actions/movieActions";
 
 // COMPONENTS
 import { Table } from "../common/Table/Table";
@@ -12,34 +17,44 @@ import { Table } from "../common/Table/Table";
 import { IMovie } from "../../interfaces/IMovie";
 
 // STYLED
-import { movieListContainer as Container, StyledPosterImg } from "./styles";
+import {
+  movieListContainer as Container,
+  StyledPosterImg,
+  InputContainer,
+} from "./styles";
+import { Input } from "../common/Input/Input";
+import { updateURLFilters } from "../../utils/urlFilters";
 
 interface IProps {
   getMovieListAction(page: number): void;
   movieList: IMovie[];
   moviePagination: any;
-}
-
-interface IState {
-  currentPage: number;
+  searchMovieAction(searchText: any): void;
 }
 
 const MovieList = memo<IProps>(
-  ({ getMovieListAction, movieList, moviePagination }) => {
-    const initialState: IState = {
-      currentPage: 1,
-    };
-
-    const [state, setState] = useState<IState>(initialState);
+  ({ getMovieListAction, movieList, moviePagination, searchMovieAction }) => {
+    // FILTERS FROM URL
+    const history = useHistory();
+    const { search } = useLocation();
+    const { searchText, page } = queryString.decode(search.replace("?", ""));
 
     useEffect(() => {
-      getMovieListAction(state.currentPage);
+      const currentPage = page ? Number(page) : 1;
+      if (searchText) searchMovieAction(searchText);
+      else getMovieListAction(currentPage);
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [state]);
+    }, [page, searchText]);
+
+    // UPDATE URL FILTER BY KEY VALUE
+    const handleChange = (event: any) => {
+      const { name, value } = event.target;
+      updateURLFilters(name, value, history);
+    };
 
     // CHANGE THE PAGE FROM TABLE
     const handlePage = (selectedPage: number) => {
-      setState((prevState) => ({ ...prevState, currentPage: selectedPage }));
+      updateURLFilters("page", selectedPage, history);
     };
 
     // SAVE THE CORRECT COLLECTION FOR SHOW IN ORDER
@@ -67,11 +82,17 @@ const MovieList = memo<IProps>(
     return (
       <Container>
         <h1>Las más populares</h1>
-        <Table
-          items={movies}
-          page={moviePagination}
-          handlePage={handlePage}
-        />
+        <InputContainer>
+          <Input
+            type="text"
+            label="Busca tu pelicula favorita"
+            name="searchText"
+            value={searchText ?? ""}
+            onChange={handleChange}
+            disableError
+          />
+        </InputContainer>
+        <Table items={movies} page={moviePagination} handlePage={handlePage} />
       </Container>
     );
   }
@@ -87,6 +108,7 @@ const mapState = (state: RootStateOrAny) => {
 
 const mapDispatch = {
   getMovieListAction,
+  searchMovieAction,
 };
 
 export { MovieList };

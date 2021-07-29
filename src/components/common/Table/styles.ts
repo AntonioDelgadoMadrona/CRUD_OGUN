@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { device } from "../../../utils/breakpoints";
 
 export const StyledTable = styled.div`
-  margin-top: 20px;
   padding: 20px;
   background-color: #000;
   border-radius: 10px;
@@ -22,6 +21,16 @@ export const StyledContainer = styled.div`
   row-gap: 35px;
   width: 100%;
   margin-bottom: 20px;
+
+  & img.noResults {
+    grid-column: 1 / -1;
+    align-self: center;
+    margin: 40px auto 20px auto;
+
+    @media ${device.tabletS} {
+      width: 300px;
+    }
+  }
 
   @media ${device.tabletL} {
     grid-template-columns: repeat(4, 1fr);

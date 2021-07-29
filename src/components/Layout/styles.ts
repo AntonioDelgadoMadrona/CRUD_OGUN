@@ -26,7 +26,7 @@ export const Wrapper = styled.div<IExtendedProps>`
   @media ${device.tabletM} {
     max-width: 90%;
     padding-bottom: 20px;
-  }
+  }  
 
   @media ${device.tabletS} {
     margin-top: 85px;
@@ -44,6 +44,10 @@ export const Wrapper = styled.div<IExtendedProps>`
     @media ${device.tabletL} { 
       max-width: 100%;
       padding-bottom: 0;
+    }
+
+    @media ${device.tabletS} {
+      margin-top: 0;
     }
   `}
 `;

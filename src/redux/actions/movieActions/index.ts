@@ -81,3 +81,24 @@ export function deleteMovieFromFavouritesAction(id: number) {
 export function setMovieReducerAction(tuplesArray: any) {
     return { type: types.SET_MOVIE_REDUCER, payload: tuplesArray }
 };
+
+// SEARCH MOVIE
+export function searchMovieAction(searchText: string) {
+
+    return async function (dispatch: Dispatch) {
+
+        dispatch(request());
+
+        await movieService.searchMovie(searchText)
+            .then(response => {
+                dispatch(success(response));
+            })
+            .catch(() => {
+                dispatch(failure());
+            });
+    };
+
+    function request() { return { type: types.SEARCH_MOVIE_REQUEST } };
+    function success(payload: any) { return { type: types.SEARCH_MOVIE_SUCCESS, payload } };
+    function failure() { return { type: types.SEARCH_MOVIE_FAILURE } };
+};
