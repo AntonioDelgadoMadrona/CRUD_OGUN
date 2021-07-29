@@ -15,7 +15,7 @@ export async function getMovieList(page: number) {
         headers: { 'Content-Type': 'application/json' }
     };
 
-    return await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`, requestOptions).then(handleResponse, handleError);
+    return await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=es-ES&page=${page}`, requestOptions).then(handleResponse, handleError);
 };
 
 // GET AN USER BY ID
@@ -26,5 +26,5 @@ export async function getMovieDetails(id: string) {
         headers: { 'Content-Type': 'application/json' }
     };
 
-    return await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`, requestOptions).then(handleResponse, handleError);
+    return await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=es-ES`, requestOptions).then(handleResponse, handleError);
 };

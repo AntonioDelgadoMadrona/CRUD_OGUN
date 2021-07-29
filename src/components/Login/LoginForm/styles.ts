@@ -1,11 +1,11 @@
 import styled from "styled-components";
+import { device } from "../../../utils/breakpoints";
 import { InputContainer } from "./../../common/Input/styles";
 
 export const FormContainer = styled.div`
   width: 100%;
   height: 100%;
   color: #ffffff;
-
   margin: auto;
   display: flex;
   align-items: center;
@@ -18,10 +18,14 @@ export const FormContainer = styled.div`
   }
 
   & img {
-    display: block;
-    width: 80px;
+    display: none;
+    width: 250px;
     height: auto;
-    margin: 5px auto;
+    margin: 0 auto 50px auto;
+
+    @media ${device.tabletL} {
+      display: block;
+    }
   }
 
   & label {

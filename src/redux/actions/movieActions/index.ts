@@ -4,10 +4,11 @@ import * as types from './types';
 // SERVICES
 import * as movieService from '../../../services/movieService';
 
-// TYPES
+// TYPES / INTERFACES
 import { Dispatch } from 'redux';
+import { IMovieDetails } from './../../../interfaces/IMovieDetails';
 
-// GET USER LIST
+// GET MOVIE LIST
 export function getMovieListAction(page: number) {
 
     return async function (dispatch: Dispatch) {
@@ -28,7 +29,7 @@ export function getMovieListAction(page: number) {
     function failure() { return { type: types.GET_MOVIE_LIST_FAILURE } };
 };
 
-// GET AN USER BY ID
+// GET MOVIE DETAILS
 export function getMovieDetailsAction(id: string) {
 
     return async function (dispatch: Dispatch) {
@@ -47,4 +48,19 @@ export function getMovieDetailsAction(id: string) {
     function request() { return { type: types.GET_MOVIE_DETAILS_REQUEST } };
     function success(payload: any) { return { type: types.GET_MOVIE_DETAILS_SUCCESS, payload } };
     function failure() { return { type: types.GET_MOVIE_DETAILS_FAILURE } };
+};
+
+// ADD MOVIE TO FAVOURITE LIST
+export function addMovieToFavouritesAction(movieDetails: IMovieDetails) {
+    return { type: types.ADD_MOVIE_TO_FAVOURITE_LIST, payload: movieDetails };
+};
+
+// DELETE MOVIE FROM FAVOURITE LIST
+export function deleteMovieFromFavouritesAction(id: number) {
+    return { type: types.DELETE_MOVIE_FROM_FAVOURITE_LIST, payload: id };
+};
+
+// SET MOVIE REDUCER 
+export function setMovieReducerAction(tuplesArray: any) {
+    return { type: types.SET_MOVIE_REDUCER, payload: tuplesArray }
 };

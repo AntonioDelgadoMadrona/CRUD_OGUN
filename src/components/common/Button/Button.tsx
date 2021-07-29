@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 interface IExtendedProps {
   size: "large" | "medium" | "small";
-  outline: boolean;
   color: "primary" | "secondary" | "danger";
 }
 

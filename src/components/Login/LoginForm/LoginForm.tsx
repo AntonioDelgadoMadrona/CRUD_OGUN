@@ -7,10 +7,11 @@ import { Button } from "../../common/Button/Button";
 
 // INTERFACES
 import { ILoginUser } from "../../../interfaces/ILoginUser";
-
-// STYLED
-import { FormContainer } from "./styles";
 import { ILoginErrors } from "../Login";
+
+// STYLES
+import { FormContainer } from "./styles";
+import logo from '../../../images/large logo.png'
 
 interface IProps {
   user: ILoginUser;
@@ -24,7 +25,7 @@ const LoginForm = memo<IProps>(
     return (
       <FormContainer>
         <div>
-          {/* <img src={logo} alt="laliga2" /> */}
+          <img src={logo} alt="netflixLogo" />
           <h2>Inicia Sesión</h2>
           <Input
             type="email"
@@ -49,7 +50,6 @@ const LoginForm = memo<IProps>(
           <Button
             color="primary"
             size="large"
-            outline={false}
             onClick={handleClick}
           >
             Iniciar Sesión

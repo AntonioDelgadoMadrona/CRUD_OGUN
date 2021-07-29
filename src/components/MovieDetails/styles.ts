@@ -2,7 +2,7 @@
 import styled from "styled-components";
 
 export const StyledMovieDetails = styled.div`
-  width: 100%;  
+  width: 100%;
   margin-top: 20px;
 
   & > a {
@@ -37,12 +37,59 @@ export const StyledDetails = styled.div`
   height: 600px;
   margin-top: 20px;
   border-radius: 10px;
-  padding: 20px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 5%;
+  position: relative;
+  overflow: hidden;
+  padding: 50px;
+  box-sizing: border-box;
 
-  & > h2 {
-    text-align: center;
-    font-size: 1.5rem;
-    text-transform: uppercase;
+  & button {
+    position: absolute;
+    bottom: 15%;
+    left: 45%;
+    z-index: 2;
+
+    & > svg {
+      margin-right: 5px;
+    }
+  }
+
+  & .movieDetails__backImg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    opacity: 0.1;
+  }
+
+  & > div {
+    z-index: 1;
     color: #fff;
+  }
+
+  & .movieDetails__posterImg {
+    width: 250px;
+    height: auto;
+
+    & > img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  & .movieDetails__votes {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  & .movieDetails__info > h1,
+  & .movieDetails__info > h3,
+  & .movieDetails__info > h4:not(:nth-child(4)) {
+    margin-bottom: 40px;
   }
 `;
