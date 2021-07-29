@@ -1,8 +1,8 @@
 import styled from "styled-components";
-// import { device } from "../../utils/breakpoints";
+import { device } from "../../utils/breakpoints";
 
 interface IExtendedProps {
-    path: String;
+  path: String;
 }
 
 export const Layout = styled.div`
@@ -18,24 +18,36 @@ export const Wrapper = styled.div<IExtendedProps>`
   margin: 70px auto 0 auto;
   padding: 5px 0;
   overflow: hidden;
-  `;
-//   @media ${device.tabletL} {
-//     max-width: 900px;
-//   }
-//   @media ${device.tabletM} {
-//     max-width: 90%;
-//     padding-bottom: 20px;
-//   }
-//   /* ${({ path }) =>
-//         path?.toLowerCase() === "/login" &&
-//         `
-//     width: 100%;
-//     min-height: 95vh;
-//     max-width: 100%;
-//     margin: 0;
-//     padding: 0;
-//     @media ${device.tabletL} { 
-//       max-width: 100%;
-//       padding-bottom: 0;
-//     }
-//   `} */
+
+  @media ${device.tabletL} {
+    max-width: 900px;
+  }
+
+  @media ${device.tabletM} {
+    max-width: 90%;
+    padding-bottom: 20px;
+  }  
+
+  @media ${device.tabletS} {
+    margin-top: 85px;
+  }
+
+  ${({ path }) =>
+    path?.toLowerCase() === "/login" &&
+    `
+    width: 100%;
+    min-height: 95vh;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+
+    @media ${device.tabletL} { 
+      max-width: 100%;
+      padding-bottom: 0;
+    }
+
+    @media ${device.tabletS} {
+      margin-top: 0;
+    }
+  `}
+`;
